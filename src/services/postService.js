@@ -11,7 +11,7 @@ class PostService {
     // If not found, fetch from public API
     const response = await fetch(`${public_api}/posts/${id}`);
     if (!response.ok) {
-      throw new Error(`Failed to fetch post with id ${id}`);
+      throw new ApiError(404, `Post with id ${id} not found`);
     }
     post = await response.json();
     await postRepository.savePost(post);
@@ -27,7 +27,7 @@ class PostService {
     // If no posts, fetch first 10 posts from public API as example
     const response = await fetch(`${public_api}/posts?_limit=10`);
     if (!response.ok) {
-      throw new Error(`Failed to fetch posts`);
+      throw new ApiError(500, `Failed to fetch posts`);
     }
     posts = await response.json();
 

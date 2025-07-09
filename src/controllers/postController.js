@@ -7,7 +7,9 @@ exports.getPostById = async (req, res) => {
     res.json(post);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    res
+      .status(error.statusCode || 500)
+      .json({ error: error.message || "Internal Server Error" });
   }
 };
 
@@ -17,6 +19,8 @@ exports.getAllPosts = async (req, res) => {
     res.json(posts);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    res
+      .status(error.statusCode || 500)
+      .json({ error: error.message || "Internal Server Error" });
   }
 };
