@@ -1,5 +1,6 @@
 const { public_api } = require("../config/config");
 const postRepository = require("../repositories/postRepository");
+const ApiError = require("../utils/ApiError");
 
 class PostService {
   async getPostById(id) {
