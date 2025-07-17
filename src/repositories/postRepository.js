@@ -28,7 +28,7 @@ class PostRepository {
   savePost(post) {
     return new Promise((resolve, reject) => {
       db.run(
-        `INSERT INTO posts (id, userId, title, body) VALUES (?, ?, ?, ?)`,
+        `INSERT OR REPLACE INTO posts (id, userId, title, body) VALUES (?, ?, ?, ?)`,
         [post.id, post.userId, post.title, post.body],
         function (err) {
           if (err) {
